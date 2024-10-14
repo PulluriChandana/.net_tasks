@@ -3,9 +3,9 @@ class Student
 {
     
     
-    static void Getting(int[] scores)
+    static void GetStudentScores(int[] scores)
     {
-        int n = 5;
+        var n = 5;
         
         for (int i = 0; i < n; i++)
         {
@@ -18,10 +18,10 @@ class Student
     }
     public static void Main(string[] args)
     {
-        int n = 5;
+        var n = 5;
         int[] scores = new int[n];
         //reverseArray(scores);
-        Getting(scores);
+        GetStudentScores(scores);
         Console.WriteLine("Scores ");
 
         double average = CalculateAverage(scores);
@@ -44,11 +44,11 @@ class Student
         }
         static void reverseArray(int[] scores)
         {
-            int left = 0;
-            int right = scores.Length - 1;
+            var left = 0;
+            var right = scores.Length - 1;
             while (left < right)
             {
-                int temp = scores[left];
+                var temp = scores[left];
                 scores[left] = scores[right];
                 scores[right] = temp;
                 left++;
@@ -58,7 +58,7 @@ class Student
         static double CalculateAverage(int[] scores)
         {
             scores.OrderBy(c=>c);
-            int total = 0;
+            var total = 0;
             foreach (int var in scores)
             {
                 total += var;
