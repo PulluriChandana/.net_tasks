@@ -1,0 +1,14 @@
+C:\Users\YQ992GX\source\repos\Task2_Arrayfunctions\Task2_Arrayfunctions\bin\Debug\net8.0\Task2_Arrayfunctions.exe
+C:\Users\YQ992GX\source\repos\Task2_Arrayfunctions\Task2_Arrayfunctions\bin\Debug\net8.0\Task2_Arrayfunctions.deps.json
+C:\Users\YQ992GX\source\repos\Task2_Arrayfunctions\Task2_Arrayfunctions\bin\Debug\net8.0\Task2_Arrayfunctions.runtimeconfig.json
+C:\Users\YQ992GX\source\repos\Task2_Arrayfunctions\Task2_Arrayfunctions\bin\Debug\net8.0\Task2_Arrayfunctions.dll
+C:\Users\YQ992GX\source\repos\Task2_Arrayfunctions\Task2_Arrayfunctions\bin\Debug\net8.0\Task2_Arrayfunctions.pdb
+C:\Users\YQ992GX\source\repos\Task2_Arrayfunctions\Task2_Arrayfunctions\obj\Debug\net8.0\Task2_Arrayfunctions.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\YQ992GX\source\repos\Task2_Arrayfunctions\Task2_Arrayfunctions\obj\Debug\net8.0\Task2_Arrayfunctions.AssemblyInfoInputs.cache
+C:\Users\YQ992GX\source\repos\Task2_Arrayfunctions\Task2_Arrayfunctions\obj\Debug\net8.0\Task2_Arrayfunctions.AssemblyInfo.cs
+C:\Users\YQ992GX\source\repos\Task2_Arrayfunctions\Task2_Arrayfunctions\obj\Debug\net8.0\Task2_Arrayfunctions.csproj.CoreCompileInputs.cache
+C:\Users\YQ992GX\source\repos\Task2_Arrayfunctions\Task2_Arrayfunctions\obj\Debug\net8.0\Task2_Arrayfunctions.dll
+C:\Users\YQ992GX\source\repos\Task2_Arrayfunctions\Task2_Arrayfunctions\obj\Debug\net8.0\refint\Task2_Arrayfunctions.dll
+C:\Users\YQ992GX\source\repos\Task2_Arrayfunctions\Task2_Arrayfunctions\obj\Debug\net8.0\Task2_Arrayfunctions.pdb
+C:\Users\YQ992GX\source\repos\Task2_Arrayfunctions\Task2_Arrayfunctions\obj\Debug\net8.0\Task2_Arrayfunctions.genruntimeconfig.cache
+C:\Users\YQ992GX\source\repos\Task2_Arrayfunctions\Task2_Arrayfunctions\obj\Debug\net8.0\ref\Task2_Arrayfunctions.dll

@@ -1,0 +1,14 @@
+C:\Users\YQ992GX\source\repos\Task2_list\Task2_list\bin\Debug\net8.0\Task2_list.exe
+C:\Users\YQ992GX\source\repos\Task2_list\Task2_list\bin\Debug\net8.0\Task2_list.deps.json
+C:\Users\YQ992GX\source\repos\Task2_list\Task2_list\bin\Debug\net8.0\Task2_list.runtimeconfig.json
+C:\Users\YQ992GX\source\repos\Task2_list\Task2_list\bin\Debug\net8.0\Task2_list.dll
+C:\Users\YQ992GX\source\repos\Task2_list\Task2_list\bin\Debug\net8.0\Task2_list.pdb
+C:\Users\YQ992GX\source\repos\Task2_list\Task2_list\obj\Debug\net8.0\Task2_list.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\YQ992GX\source\repos\Task2_list\Task2_list\obj\Debug\net8.0\Task2_list.AssemblyInfoInputs.cache
+C:\Users\YQ992GX\source\repos\Task2_list\Task2_list\obj\Debug\net8.0\Task2_list.AssemblyInfo.cs
+C:\Users\YQ992GX\source\repos\Task2_list\Task2_list\obj\Debug\net8.0\Task2_list.csproj.CoreCompileInputs.cache
+C:\Users\YQ992GX\source\repos\Task2_list\Task2_list\obj\Debug\net8.0\Task2_list.dll
+C:\Users\YQ992GX\source\repos\Task2_list\Task2_list\obj\Debug\net8.0\refint\Task2_list.dll
+C:\Users\YQ992GX\source\repos\Task2_list\Task2_list\obj\Debug\net8.0\Task2_list.pdb
+C:\Users\YQ992GX\source\repos\Task2_list\Task2_list\obj\Debug\net8.0\Task2_list.genruntimeconfig.cache
+C:\Users\YQ992GX\source\repos\Task2_list\Task2_list\obj\Debug\net8.0\ref\Task2_list.dll
