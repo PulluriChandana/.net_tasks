@@ -74,11 +74,9 @@ namespace Task5_RESTAPI.Services
                 return "Hire Date must be within the last 60 days";
             }
             var departmentExists=Departments.departments.Any(d=>d.DepartmentId==employee.DepartmentId);
+            if (!departmentExists)
             {
-                if (!departmentExists)
-                {
-                    return "Invalid Department ID.";
-                }
+                return "Invalid Department ID.";
             }
             return string.Empty;
         }
