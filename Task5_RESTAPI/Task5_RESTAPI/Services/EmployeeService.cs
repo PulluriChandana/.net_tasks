@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 namespace Task5_RESTAPI.Services
 {
-    public class EmployeeService
+    public class EmployeeService:IEmployeeService
     {
         private static int _nextno = 6;
         public bool Create(Employee employee)
