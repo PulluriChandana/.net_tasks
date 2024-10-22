@@ -10,11 +10,13 @@ namespace Task5_RESTAPI.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private EmployeeService employeeService;
+        //private EmployeeService employeeService;
+        private readonly IEmployeeService employeeService;
 
-        public EmployeeController()
+        public EmployeeController(HrDbContext hrDbContext)
         {
-            employeeService = new EmployeeService();
+            //employeeService = new EmployeeService();
+            employeeService = new EmployeeServiceWithEF(hrDbContext);
         }
 
         [HttpPost]
@@ -37,8 +39,14 @@ namespace Task5_RESTAPI.Controllers
         [HttpGet]
         public List<Employee> GetEmployees()
         {
-            var employees = employeeService.GetAll();
-            return Employees.employees;
+            /* var employees = employeeService.GetAll();
+             return Employees.employees;*/
+            var employeesFromDb = employeeService.GetAll();
+            var combinedEmployees = Employees.employees.Concat(employeesFromDb).ToList();
+            return combinedEmployees;
+
+            //ceate end point to get emplyess by gender
+            // create endpoint get eaplues ny departmnend id
         }
         [HttpGet("{id}")]
         public IActionResult GetByNo(int employeeno)
@@ -63,7 +71,7 @@ namespace Task5_RESTAPI.Controllers
             return NotFound("An unexpected error occured");
         }
         [HttpPut("{id}")]
-        public IActionResult Update(int employeeno,Employee employee)
+        public IActionResult Update(int employeeno, Employee employee)
         {
             try
             {
@@ -72,6 +80,50 @@ namespace Task5_RESTAPI.Controllers
                 {
                     return Ok();
                 }
+            }
+            catch (BadHttpRequestException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentNullException)
+            {
+                return NotFound("Employee not found");
+            }
+            return NotFound("An unexpected error occured");
+        }
+        [HttpGet("gender/{gender}")]
+        public IActionResult GetEmployeeByGender(Gender gender)
+        {
+            try
+            {
+                var employees = employeeService.GetByGender(gender);
+                if(employees == null || !employees.Any())
+                {
+                    return NotFound("No employees found for the specified gender.");
+                }
+                return Ok(employees);
+            }
+            catch (BadHttpRequestException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentNullException)
+            {
+                return NotFound("Employee not found");
+            }
+            return NotFound("An unexpected error occured");
+        }
+        [HttpGet("departmentId{departmentId}")]
+        public IActionResult GetEmployeesByDepartmentId(int departmentId)
+        {
+            try
+            {
+                var employees = employeeService.GetByDepartmentId(departmentId);
+                if (employees == null || !employees.Any())
+                {
+                    return NotFound("No employees found for the specified department ID.");
+                }
+                return Ok(employees);
             }
             catch (BadHttpRequestException ex)
             {

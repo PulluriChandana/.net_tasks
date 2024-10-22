@@ -1,4 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Task5_RESTAPI.Db;
+
 var builder = WebApplication.CreateBuilder(args);
+//builder.Services.AddDbContext<HrDbContext>(options =>
+//options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<HrDbContext>();
+
 
 // Add services to the container.
 

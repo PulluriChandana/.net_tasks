@@ -23,5 +23,6 @@ namespace Task5_RESTAPI.Db
         public string? Name { get; set; }
         [Required(ErrorMessage = "Location is requried")]
         public string? Location { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

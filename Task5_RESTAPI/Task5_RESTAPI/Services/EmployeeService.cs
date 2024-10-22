@@ -56,6 +56,14 @@ namespace Task5_RESTAPI.Services
         {
             return Employees.employees;
         }
+        public List<Employee> GetByDepartmentId(int departmentId)
+        {
+            return Employees.employees.Where(e=>e.DepartmentId == departmentId).ToList();
+        }
+        public List<Employee> GetByGender(Gender gender)
+        {
+            return Employees.employees.Where(e=>e.Gender == gender).ToList();
+        }
         private static string Validate(Employee employee)
         {
             if(string.IsNullOrEmpty(employee.EmpName) || string.IsNullOrEmpty(employee.JobTitle))

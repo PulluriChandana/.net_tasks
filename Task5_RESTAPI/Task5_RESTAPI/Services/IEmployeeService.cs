@@ -9,5 +9,7 @@ namespace Task5_RESTAPI.Services
         bool DeleteByNo(int empno);
         Employee GetByNo(int empno);
         List<Employee> GetAll();
+        List<Employee> GetByGender(Gender gender);
+        List<Employee> GetByDepartmentId(int departmentId);
     }
 }

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Task5_RESTAPI.Services
 {
-    public class DepartmentService
+    public class DepartmentService:IDepartmentService
     {
         private static int _nextId = 9;
         public bool Create(Department department)

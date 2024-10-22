@@ -10,10 +10,12 @@ namespace Task5_RESTAPI.Controllers
     [ApiController]
     public class DepartmentController : ControllerBase
     {
-        private DepartmentService DepartmentService;
-        public DepartmentController()
+       // private DepartmentService departmentService;
+       private readonly IDepartmentService departmentService;
+        public DepartmentController(HrDbContext hrDbContext)
         {
-            DepartmentService = new DepartmentService();
+            //DepartmentService = new DepartmentService();
+            departmentService=new DepartmentServiceWithEF(hrDbContext);
         }
         
         [HttpPost]
@@ -21,7 +23,7 @@ namespace Task5_RESTAPI.Controllers
         {
             try
             {
-                this.DepartmentService.Create(department);
+                this.departmentService.Create(department);
                 return CreatedAtAction(nameof(Create), new { id = department.DepartmentId }, department);
             }
             catch (BadHttpRequestException ex)
@@ -37,15 +39,19 @@ namespace Task5_RESTAPI.Controllers
         [HttpGet]
         public List<Department> GetDepartments()
         {
-            var departments = DepartmentService.GetAll();
-            return Departments.departments;
+            /*var departments = departmentService.GetAll();
+            return Departments.departments;*/
+            var departmentsFromDb = departmentService.GetAll();
+            var combinedDepartments = Departments.departments.Concat(departmentsFromDb).ToList();
+           // departmentsFromDb.AddRange(Departments.departments);
+            return combinedDepartments;
         }
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             try
             {
-                var result = DepartmentService.GetById(id);
+                var result = departmentService.GetById(id);
                 if (result == null)
                 {
                     return new NotFoundResult();
@@ -67,7 +73,7 @@ namespace Task5_RESTAPI.Controllers
         {
             try
             {
-                var updated = DepartmentService.Update(id, updateddepartment);
+                var updated = departmentService.Update(id, updateddepartment);
                 if (updated)
                 {
                     return Ok();
@@ -88,7 +94,7 @@ namespace Task5_RESTAPI.Controllers
         {
             try
             {
-                var deleted = DepartmentService.DeleteById(id);
+                var deleted = departmentService.DeleteById(id);
                 if(deleted)
                 {
                     return Ok();
