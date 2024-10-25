@@ -9,7 +9,7 @@ namespace Task5_RESTAPI.Services
         bool DeleteById(int id);
         Department GetById(int id);
         List<Department> GetAll();
-
+        List<Department> GetDepartmentByLocation(string location);
 
     }
 }

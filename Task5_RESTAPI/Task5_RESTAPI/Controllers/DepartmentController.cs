@@ -12,10 +12,11 @@ namespace Task5_RESTAPI.Controllers
     {
        // private DepartmentService departmentService;
        private readonly IDepartmentService departmentService;
-        public DepartmentController(HrDbContext hrDbContext)
+        public DepartmentController(HrDbContext hrDbContext,IDepartmentService departmentService)
         {
             //DepartmentService = new DepartmentService();
-            departmentService=new DepartmentServiceWithEF(hrDbContext);
+            //departmentService=new DepartmentServiceWithEF(hrDbContext);
+            this.departmentService= departmentService;
         }
         
         [HttpPost]
@@ -36,6 +37,7 @@ namespace Task5_RESTAPI.Controllers
             }
 
         }
+
         [HttpGet]
         public List<Department> GetDepartments()
         {
@@ -46,6 +48,21 @@ namespace Task5_RESTAPI.Controllers
            // departmentsFromDb.AddRange(Departments.departments);
             return combinedDepartments;
         }
+
+        [HttpGet("location/{location}")]
+        public IActionResult GetDepartmentByLocation(string location)
+        {
+            try
+            {
+                var result = departmentService.GetDepartmentByLocation(location);
+                return Ok(result);
+            }
+            catch (BadHttpRequestException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -66,8 +83,8 @@ namespace Task5_RESTAPI.Controllers
             {
                 return NotFound("Employee not found");
             }
-            return NotFound("An unexpected error occured");
         }
+
         [HttpPut("{id}")]
         public IActionResult Update(int id, Department updateddepartment)
         {
@@ -78,6 +95,7 @@ namespace Task5_RESTAPI.Controllers
                 {
                     return Ok();
                 }
+                return NotFound("An unexpected error occured");
             }
             catch (BadHttpRequestException ex)
             {
@@ -87,8 +105,8 @@ namespace Task5_RESTAPI.Controllers
             {
                 return NotFound("Employee not found");
             }
-            return NotFound("An unexpected error occured");
         }
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -99,6 +117,7 @@ namespace Task5_RESTAPI.Controllers
                 {
                     return Ok();
                 }
+                return NotFound("An unexpected error occured");
             }
             catch (BadHttpRequestException ex)
             {
@@ -108,7 +127,6 @@ namespace Task5_RESTAPI.Controllers
             {
                 return NotFound("Employee not found");
             }
-            return NotFound("An unexpected error occured");
         }
     }
 }

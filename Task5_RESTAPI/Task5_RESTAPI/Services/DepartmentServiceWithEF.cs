@@ -13,23 +13,23 @@ namespace Task5_RESTAPI.Services
         public bool Create(Department department)
         {
             // add validation in both departmen tand employee
-            var validationResult=Validate(department,hrDbContext);
+            var validationResult = Validate(department, hrDbContext);
             if (!string.IsNullOrEmpty(validationResult))
             {
                 throw new BadHttpRequestException(validationResult);
             }
             this.hrDbContext.Add(department);
-            return hrDbContext.SaveChanges()>0;
+            return hrDbContext.SaveChanges() > 0;
         }
         public bool DeleteById(int id)
         {
-            var department=hrDbContext.Departments.Find(id);
+            var department = hrDbContext.Departments.Find(id);
             if (department == null)
             {
                 throw new ArgumentNullException("Id not found");
             }
             this.hrDbContext.Remove(department);
-            return hrDbContext.SaveChanges()>0;
+            return hrDbContext.SaveChanges() > 0;
         }
         public List<Department> GetAll()
         {
@@ -43,7 +43,7 @@ namespace Task5_RESTAPI.Services
 
         public bool Update(int id, Department department)
         {
-            var validationResult = Validate(department,hrDbContext);
+            var validationResult = Validate(department, hrDbContext);
             if (!string.IsNullOrEmpty(validationResult))
             {
                 throw new BadHttpRequestException(validationResult);
@@ -57,16 +57,23 @@ namespace Task5_RESTAPI.Services
             existingdepartment.Location = department.Location;
             return hrDbContext.SaveChanges() > 0;
         }
-        private static string Validate(Department department,HrDbContext hrDbContext)
+
+        public List<Department> GetDepartmentByLocation(string location)
         {
-            //should not be empty
+            return hrDbContext.Departments.Where(d=>d.Location.Equals(location, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
+        private static string Validate(Department department, HrDbContext hrDbContext)
+        {
+            // Should not be empty
             if (string.IsNullOrEmpty(department.Name) || string.IsNullOrEmpty(department.Location))
             {
                 return "Department name and location cannot be empty.";
             }
-            // name should be unique
+            //var existingDepartments = hrDbContext.Departments.ToList(); 
             bool isNameUnique = !hrDbContext.Departments.Any(d =>
-            string.Equals(d.Name, department.Name, StringComparison.OrdinalIgnoreCase));
+                d.Name.Equals(department.Name, StringComparison.OrdinalIgnoreCase)
+                && d.DepartmentId != department.DepartmentId);
+
             if (!isNameUnique)
             {
                 return "Department name must be unique";

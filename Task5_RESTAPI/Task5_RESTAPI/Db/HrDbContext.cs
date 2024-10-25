@@ -10,7 +10,8 @@ namespace Task5_RESTAPI.Db
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=IN3563405W1\\SQLEXPRESS;Initial Catalog=office;Integrated Security = True; Connect Timeout = 30; Encrypt=False;Trust Server Certificate=False;Application Intent = ReadWrite; Multi Subnet Failover=False");
+            optionsBuilder.UseSqlServer("Data Source=IN3563405W1\\SQLEXPRESS;Initial Catalog=office;Integrated Security = True; Connect Timeout = 30; Encrypt=False;Trust Server Certificate=False;Application Intent = ReadWrite; Multi Subnet Failover=False")
+                .EnableSensitiveDataLogging(true).LogTo(Console.WriteLine);
             base.OnConfiguring(optionsBuilder);
         }
        
