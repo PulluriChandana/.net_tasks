@@ -3,6 +3,9 @@ using Task5_RESTAPI.Db;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
+using Task5_RESTAPI.Db.Filter;
+using Microsoft.EntityFrameworkCore;
+using Task5_RESTAPI.Db.DTO;
 namespace Task5_RESTAPI.Services
 {
     public class EmployeeService:IEmployeeService
@@ -52,10 +55,64 @@ namespace Task5_RESTAPI.Services
             return Employees.employees.FirstOrDefault(e => e.Employeeno == empno);
           
         }
-        public List<Employee> GetAll()
+        /*public List<Employee> GetAll()
         {
             return Employees.employees;
+        }*/
+        public List<Employee> GetAll(EmployeeFilter filter)
+        {
+            var employees = Employees.employees.AsQueryable();
+
+            // Apply filters based on the filter criteria
+            if (filter.DepartmentId.HasValue)
+            {
+                employees = employees.Where(e => e.DepartmentId == filter.DepartmentId.Value);
+            }
+
+            if (filter.Gender.HasValue)
+            {
+                employees = employees.Where(e => e.Gender == filter.Gender.Value);
+            }
+
+            if (filter.SalaryGreaterThan.HasValue)
+            {
+                employees = employees.Where(e => e.Salary > filter.SalaryGreaterThan.Value);
+            }
+
+            if (filter.SalaryLessThan.HasValue)
+            {
+                employees = employees.Where(e => e.Salary < filter.SalaryLessThan.Value);
+            }
+
+            return employees.ToList();
         }
+
+        public List<EmployeDTO> GetAllEmployeeWithDepartment(string location)
+        {
+            if (!string.IsNullOrEmpty(location))
+            {
+                var query = Employees.employees.AsQueryable().Where(e =>
+                e.Department.Location == location).Select(e => new EmployeDTO
+                {
+                    Name = e.EmpName,
+                    DepartmentName = e.Department.Name,
+                    Location = e.Department.Location
+                });
+                return query.ToList();
+            }
+            return new List<EmployeDTO>();
+        }
+        public List<EmployeeDepartmentReport> GetEmployeeDepartmentReport()
+        {
+            return Employees.employees.GroupBy(e => e.Department.DepartmentId).Select(g => new EmployeeDepartmentReport
+            {
+                DepartmentId = g.Key,
+                DepartmentName = g.FirstOrDefault().Department.Name,
+                NoOfEmployees = g.Count()
+            })
+            .ToList();
+        }
+
         public List<Employee> GetByDepartmentId(int departmentId)
         {
             return Employees.employees.Where(e=>e.DepartmentId == departmentId).ToList();

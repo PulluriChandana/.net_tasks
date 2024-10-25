@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Task5_RESTAPI.Services;
 using Task5_RESTAPI.Db;
 using static Task5_RESTAPI.Db.Employee;
+using Task5_RESTAPI.Db.Filter;
+using Task5_RESTAPI.Db.DTO;
 
 namespace Task5_RESTAPI.Controllers
 {
@@ -36,18 +38,19 @@ namespace Task5_RESTAPI.Controllers
                 return BadRequest("Unhandled exception occured");
             }
         }
+
         [HttpGet]
-        public List<Employee> GetEmployees()
+        public List<Employee> GetEmployees([ FromQuery]EmployeeFilter filter)
         {
             /* var employees = employeeService.GetAll();
              return Employees.employees;*/
-            var employeesFromDb = employeeService.GetAll();
-            var combinedEmployees = Employees.employees.Concat(employeesFromDb).ToList();
-            return combinedEmployees;
-
-            //ceate end point to get emplyess by gender
-            // create endpoint get eaplues ny departmnend id
+            var employeesFromDb = employeeService.GetAll(filter);
+            //var combinedEmployees = Employees.employees.Concat(employeesFromDb).ToList();
+            return employeesFromDb;  
         }
+        //ceate end point to get emplyess by gender
+        // create endpoint get eaplues ny departmnend id
+
         [HttpGet("{id}")]
         public IActionResult GetByNo(int employeeno)
         {
@@ -68,8 +71,30 @@ namespace Task5_RESTAPI.Controllers
             {
                 return NotFound("Employee not found");
             }
-            return NotFound("An unexpected error occured");
         }
+
+        [HttpGet("with-department")]
+        public IActionResult GetAllWithEmployeeDepartment(string location)
+        {
+            try
+            {
+                var result = employeeService.GetAllEmployeeWithDepartment(location);
+                if (result == null && result.Any())
+                {
+                    return NotFound("No employees found for the specified location");
+                }
+                return Ok(result);
+            }
+            catch (BadHttpRequestException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentNullException) 
+            {
+                return NotFound("Employee not found");
+            }
+        }
+        
         [HttpPut("{id}")]
         public IActionResult Update(int employeeno, Employee employee)
         {
@@ -80,6 +105,7 @@ namespace Task5_RESTAPI.Controllers
                 {
                     return Ok();
                 }
+                return NotFound("An unexpected error occured");
             }
             catch (BadHttpRequestException ex)
             {
@@ -89,8 +115,8 @@ namespace Task5_RESTAPI.Controllers
             {
                 return NotFound("Employee not found");
             }
-            return NotFound("An unexpected error occured");
         }
+
         [HttpGet("gender/{gender}")]
         public IActionResult GetEmployeeByGender(Gender gender)
         {
@@ -111,8 +137,8 @@ namespace Task5_RESTAPI.Controllers
             {
                 return NotFound("Employee not found");
             }
-            return NotFound("An unexpected error occured");
         }
+
         [HttpGet("departmentId{departmentId}")]
         public IActionResult GetEmployeesByDepartmentId(int departmentId)
         {
@@ -133,8 +159,26 @@ namespace Task5_RESTAPI.Controllers
             {
                 return NotFound("Employee not found");
             }
-            return NotFound("An unexpected error occured");
         }
+
+        [HttpGet("department-report")]
+        public IActionResult GetEmployeeDepartmentReport()
+        {
+            try
+            {
+                var report = employeeService.GetEmployeeDepartmentReport();
+                return Ok(report);
+            }
+            catch (BadHttpRequestException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentNullException)
+            {
+                return NotFound("Employee not found");
+            }
+        }
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int employeeno)
         {
@@ -145,6 +189,8 @@ namespace Task5_RESTAPI.Controllers
                 {
                     return Ok();
                 }
+                return NotFound("An unexpected error occured");
+
             }
             catch (BadHttpRequestException ex)
             {
@@ -154,7 +200,6 @@ namespace Task5_RESTAPI.Controllers
             {
                 return NotFound("Employee not found");
             }
-            return NotFound("An unexpected error occured");
         }
     }
 }

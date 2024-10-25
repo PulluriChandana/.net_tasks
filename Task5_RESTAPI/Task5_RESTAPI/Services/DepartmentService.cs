@@ -3,6 +3,7 @@ using Task5_RESTAPI.Db;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Task5_RESTAPI.Services
 {
@@ -22,6 +23,10 @@ namespace Task5_RESTAPI.Services
             Departments.departments.Add(department);
             return true;
 
+        }
+        public List<Department> GetDepartmentByLocation(string location)
+        {
+            return Departments.departments.Where(d => d.Location.Equals(location, StringComparison.OrdinalIgnoreCase)).ToList();
         }
         public bool Update(int id,Department department)
         {
