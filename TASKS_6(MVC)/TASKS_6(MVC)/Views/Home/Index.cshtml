@@ -1,0 +1,30 @@
+﻿@model TASKS_6_MVC_.Models.ViewModels.HomeViewModel
+<link href="~/css/HomeIndex.css" rel="stylesheet" type="text/css" />
+
+<div class="content">
+    <div class="left-list">
+        <h2>Employee List</h2>
+        <ul>
+            @foreach (var employee in Model.Employees)
+            {
+                <li>@employee.EmpName - @employee.JobTitle - @employee.Department?.Name</li>
+            }
+        </ul>
+    </div>
+
+    <div class="right-list">
+        <h2>Departments and Employees</h2>
+        @foreach (var department in Model.Departments)
+        {
+            <div class="department-block">
+                <h3>@department.Name</h3>
+                <ul>
+                    @foreach (var employee in department.Employees)
+                    {
+                        <li>@employee.EmpName - @employee.JobTitle</li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+</div>

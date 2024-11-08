@@ -1,0 +1,49 @@
+﻿@model List<TASKS_6_MVC_.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employees by Gender";
+}
+<head>
+    <link href="~/css/gender.css" rel="stylesheet" type="text/css" />
+</head>
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @if (Model != null && Model.Any())
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Employee No</th>
+                            <th>Name</th>
+                            <th>Job Title</th>
+                            <th>Gender</th>
+                            <th>Hire Date</th>
+                            <th>Salary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var employee in Model)
+                        {
+                            <tr>
+                                <td>@employee.Employeeno</td>
+                                <td>@employee.EmpName</td>
+                                <td>@employee.JobTitle</td>
+                                <td>@Enum.GetName(typeof(Gender), employee.Gender)</td>
+                                <td>@employee.HireDate.ToString("d")</td>
+                                <td>@employee.Salary.ToString("C")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No employees found for the selected gender.</p>
+            }
+        </div>
+    </div>
+</div>
