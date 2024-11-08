@@ -9,8 +9,7 @@ namespace Task5_RESTAPI.Services
         {
             this.hrDbContext = hrDbContext;
         }
-
-        public bool Create(Department department)
+            public bool Create(Department department)
         {
             // add validation in both departmen tand employee
             var validationResult = Validate(department, hrDbContext);
@@ -69,11 +68,12 @@ namespace Task5_RESTAPI.Services
             {
                 return "Department name and location cannot be empty.";
             }
-            //var existingDepartments = hrDbContext.Departments.ToList(); 
-            bool isNameUnique = !hrDbContext.Departments.Any(d =>
+            /*bool isNameUnique = !hrDbContext.Departments.Any(d =>
                 d.Name.Equals(department.Name, StringComparison.OrdinalIgnoreCase)
-                && d.DepartmentId != department.DepartmentId);
-
+                && d.DepartmentId != department.DepartmentId);*/
+            bool isNameUnique = !hrDbContext.Departments.Any(d =>
+                            d.Name.ToLower() == department.Name.ToLower() 
+                            && d.DepartmentId != department.DepartmentId);
             if (!isNameUnique)
             {
                 return "Department name must be unique";

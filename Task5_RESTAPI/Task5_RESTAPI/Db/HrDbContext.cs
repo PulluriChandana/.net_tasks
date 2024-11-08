@@ -14,18 +14,26 @@ namespace Task5_RESTAPI.Db
                 .EnableSensitiveDataLogging(true).LogTo(Console.WriteLine);
             base.OnConfiguring(optionsBuilder);
         }
-       
-        //public HrDbContext(DbContextOptions options) : base(options)
-        //{
-        //}
+
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Role> roles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>().HasKey(e => e.Employeeno);
+            modelBuilder.Entity<Employee>()
+        .Property(e => e.Age) 
+        .HasComputedColumnSql("DATEDIFF(YEAR, DateOfBirth, GETDATE())");
             modelBuilder.Entity<Department>().HasKey(d=>d.DepartmentId);
+
+            modelBuilder.Entity<Role>().HasKey(d=>d.RoleId);
+
             modelBuilder.Entity<Employee>().HasOne(e=>e.Department)
                 .WithMany(d=>d.Employees).HasForeignKey(e=>e.DepartmentId);
+
+            modelBuilder.Entity<Employee>().Ignore(e=>e.Age);
+            modelBuilder.Entity<Employee>().HasOne(e => e.Role)
+                .WithMany(d => d.Employees).HasForeignKey(e => e.RoleId);
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Task5_RESTAPI.Services
 {
-    public class DepartmentService:IDepartmentService
+    /*public class DepartmentService:IDepartmentService
     {
         private static int _nextId = 9;
         public bool Create(Department department)
@@ -23,8 +23,24 @@ namespace Task5_RESTAPI.Services
             Departments.departments.Add(department);
             return true;
 
-        }
-        public List<Department> GetDepartmentByLocation(string location)
+        }*/
+        public class DepartmentService: IDepartmentService
+        {
+            private static int _nextId = 9;
+            public bool Create(Department department)
+            {
+                // Validate
+                var validationResult = Validate(department);
+                if (!string.IsNullOrEmpty(validationResult))
+                {
+                    throw new BadHttpRequestException(validationResult);
+                }
+                //db insert
+                department.DepartmentId = _nextId++;
+                Departments.departments.Add(department);
+                return true;
+            }
+            public List<Department> GetDepartmentByLocation(string location)
         {
             return Departments.departments.Where(d => d.Location.Equals(location, StringComparison.OrdinalIgnoreCase)).ToList();
         }

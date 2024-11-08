@@ -161,6 +161,28 @@ namespace Task5_RESTAPI.Controllers
             }
         }
 
+        [HttpGet("roleId{roleId}")]
+        public IActionResult GetEmployeesByRoleId(int roleId)
+        {
+            try
+            {
+                var role = employeeService.GetByRoleID(roleId);
+                if (role == null || !role.Any())
+                {
+                    return NotFound("No roles found for the specified role ID.");
+                }
+                return Ok(role);
+            }
+            catch (BadHttpRequestException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentNullException)
+            {
+                return NotFound("Employee not found");
+            }
+        }
+        
         [HttpGet("department-report")]
         public IActionResult GetEmployeeDepartmentReport()
         {
