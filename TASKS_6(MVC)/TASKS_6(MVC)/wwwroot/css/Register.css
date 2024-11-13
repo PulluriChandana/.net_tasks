@@ -1,0 +1,84 @@
+﻿.form-horizontal {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    color: #555;
+    font-size: 14px;
+}
+
+input.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+    input.form-control:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+.text-danger {
+    color: #e74c3c;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+.form-control:focus,
+.form-control:hover {
+    border-color: #007bff;
+}
+
+.text-danger {
+    font-size: 0.875rem;
+    margin-top: 5px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+body {
+    padding-top: 0px;
+}
+
+@media (min-width: 768px) {
+    .form-horizontal {
+        max-width: 600px;
+    }
+}

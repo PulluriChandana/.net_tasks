@@ -93,6 +93,15 @@
         <a href="@Url.Action("Index", "Home")" class="menu-item">Home</a>
         <a href="@Url.Action("Index", "Employee")" class="menu-item">Employee</a>
         <a href="@Url.Action("Index", "Department")" class="menu-item">Department</a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a href="@Url.Action("Logout", "Account")" class="menu-item">Logout</a>
+        }
+        else
+        {
+            <a href="@Url.Action("Login", "Account")" class="menu-item">Login</a>
+            <a href="@Url.Action("Register", "Account")" class="menu-item">Register</a>
+        }
     </div>
 @RenderBody()
     <footer>

@@ -11,7 +11,7 @@ namespace TASKS_6_MVC_.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
+            /*migrationBuilder.CreateTable(
                 name: "Departments",
                 columns: table => new
                 {
@@ -53,7 +53,7 @@ namespace TASKS_6_MVC_.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_DepartmentId",
                 table: "Employees",
-                column: "DepartmentId");
+                column: "DepartmentId");*/
         }
 
         /// <inheritdoc />

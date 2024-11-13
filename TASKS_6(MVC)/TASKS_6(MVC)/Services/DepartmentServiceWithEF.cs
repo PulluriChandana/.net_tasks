@@ -1,8 +1,10 @@
-﻿using TASKS_6_MVC_.Models;
+﻿using Microsoft.AspNetCore.Authorization;
+using TASKS_6_MVC_.Models;
 using TASKS_6_MVC_.Services;
 
 namespace TASKS_6_MVC_.Services
 {
+    [Authorize]
     public class DepartmentServiceWithEF : IDepartmentService
     {
         private readonly HrDbContext hrDbContext;

@@ -6,6 +6,7 @@ using TASKS_6_MVC_.Services;
 
 namespace TASKS_6_MVC_.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService iemployeeService;
