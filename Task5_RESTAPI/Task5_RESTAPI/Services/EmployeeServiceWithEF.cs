@@ -44,7 +44,6 @@ namespace Task5_RESTAPI.Services
         {
             return hrDbContext.Employees.ToList();
         }*/
-
         public List<EmployeDTO> GetAllEmployeeWithDepartment(string location)
         {
             if (!string.IsNullOrEmpty(location))
@@ -58,18 +57,18 @@ namespace Task5_RESTAPI.Services
                 });
                 return query.ToList();
             }
-            return new List<EmployeDTO>();
+            return [];
+            //return default(List<EmployeDTO>);
         }
 
         public List<EmployeeDepartmentReport> GetEmployeeDepartmentReport()
         {
-            return hrDbContext.Employees.GroupBy(e => new { e.Department.DepartmentId, e.Department.Name }).Select(g => new EmployeeDepartmentReport
+            return [.. hrDbContext.Employees.GroupBy(e => new { e.Department.DepartmentId,DepartmentName= e.Department.Name }).Select(g => new EmployeeDepartmentReport
             {
                 DepartmentId = g.Key.DepartmentId,
-                DepartmentName=g.Key.Name,
+                DepartmentName=g.Key.DepartmentName,
                 NoOfEmployees = g.Count()
-            })
-            .ToList();
+            })];
         }
         public List<Employee> GetAll(EmployeeFilter filter)
         {
@@ -96,7 +95,10 @@ namespace Task5_RESTAPI.Services
 
             return query.ToList();
         }
-
+        public List<Employee> GetByRoleID(int roleid)
+        {
+            return this.hrDbContext.Employees.Where(x => x.RoleId == roleid).ToList();
+        }
         public List<Employee> GetByDepartmentId(int departmentId)
         {
             return this.hrDbContext.Employees.Where(e => e.DepartmentId == departmentId).ToList();
@@ -120,10 +122,11 @@ namespace Task5_RESTAPI.Services
             existingemployee.EmpName = employee.EmpName;
             existingemployee.JobTitle = employee.JobTitle;
             existingemployee.HireDate = employee.HireDate;
+            existingemployee.DateOfBirth= employee.DateOfBirth;
             existingemployee.Salary = employee.Salary;
             return hrDbContext.SaveChanges() > 0;
         }
-
+       
         private static string Validate(Employee employee, HrDbContext hrDbContext)
         {
             if (string.IsNullOrEmpty(employee.EmpName) || string.IsNullOrEmpty(employee.JobTitle))

@@ -15,5 +15,6 @@ namespace Task5_RESTAPI.Services
         List<Employee> GetByDepartmentId(int departmentId);
         List<EmployeDTO> GetAllEmployeeWithDepartment(string location);
         List<EmployeeDepartmentReport> GetEmployeeDepartmentReport();
+        List<Employee> GetByRoleID(int roleid);
     }
 }

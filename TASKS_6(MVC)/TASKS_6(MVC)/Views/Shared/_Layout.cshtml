@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .menu-bar {
+            background-color: #131921;
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .menu-item {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+        }
+
+        .menu-item:hover {
+             background-color: #37475a;
+             border-radius: 5px;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .list {
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            border-bottom: 2px solid #f0c14b;
+            padding-bottom: 10px;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+            li:last-child {
+                border-bottom: none;
+            }
+
+        footer {
+            background-color: #131921;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+            footer p {
+                margin: 5px 0;
+            }
+
+            footer a {
+                color: #f0c14b;
+                text-decoration: none;
+            }
+
+                footer a:hover {
+                    text-decoration: underline;
+                }
+    </style>
+</head>
+<body>
+    <div class="menu-bar">
+        <a href="@Url.Action("Index", "Home")" class="menu-item">Home</a>
+        <a href="@Url.Action("Index", "Employee")" class="menu-item">Employee</a>
+        <a href="@Url.Action("Index", "Department")" class="menu-item">Department</a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a href="@Url.Action("Logout", "Account")" class="menu-item">Logout</a>
+        }
+        else
+        {
+            <a href="@Url.Action("Login", "Account")" class="menu-item">Login</a>
+            <a href="@Url.Action("Register", "Account")" class="menu-item">Register</a>
+        }
+    </div>
+@RenderBody()
+    <footer>
+        <p>Name: Pulluri Chandana</p>
+        <p>Email: <a href="mailto:pulluri.chandana@gds.ey.com" style="color: white;">pulluri.chandana@gds.ey.com</a></p>
+        <p>Phone Number: 8125996811</p>
+    </footer>
+
+</body>
+</html>

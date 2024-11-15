@@ -10,32 +10,31 @@ namespace Task5_RESTAPI.Controllers
     [ApiController]
     public class DepartmentController : ControllerBase
     {
-       // private DepartmentService departmentService;
-       private readonly IDepartmentService departmentService;
+        private readonly IDepartmentService departmentService;
         public DepartmentController(HrDbContext hrDbContext,IDepartmentService departmentService)
         {
             //DepartmentService = new DepartmentService();
             //departmentService=new DepartmentServiceWithEF(hrDbContext);
             this.departmentService= departmentService;
         }
-        
+
         [HttpPost]
         public IActionResult Create(Department department)
         {
             try
             {
-                this.departmentService.Create(department);
+                departmentService.Create(department);
                 return CreatedAtAction(nameof(Create), new { id = department.DepartmentId }, department);
             }
             catch (BadHttpRequestException ex)
             {
                 return BadRequest(ex.Message);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                return BadRequest("Unhandled exception occured");
+                //return BadRequest("Unhandled exception occured");
+                return BadRequest(new { error = "Unhandled exception occurred", message = ex.Message });
             }
-
         }
 
         [HttpGet]

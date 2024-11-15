@@ -117,6 +117,11 @@ namespace Task5_RESTAPI.Services
         {
             return Employees.employees.Where(e=>e.DepartmentId == departmentId).ToList();
         }
+
+        public List<Employee> GetByRoleID(int roleid)
+        {
+            return Employees.employees.Where(r => r.RoleId == roleid).ToList();
+        }
         public List<Employee> GetByGender(Gender gender)
         {
             return Employees.employees.Where(e=>e.Gender == gender).ToList();

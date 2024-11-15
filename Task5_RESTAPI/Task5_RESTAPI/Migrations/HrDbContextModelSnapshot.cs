@@ -51,6 +51,14 @@ namespace Task5_RESTAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Employeeno"));
 
+                    b.Property<int>("Age")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("int")
+                        .HasComputedColumnSql("DATEDIFF(YEAR, DateOfBirth, GETDATE())");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
@@ -68,6 +76,9 @@ namespace Task5_RESTAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("RoleId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Salary")
                         .HasColumnType("int");
 
@@ -75,7 +86,25 @@ namespace Task5_RESTAPI.Migrations
 
                     b.HasIndex("DepartmentId");
 
+                    b.HasIndex("RoleId");
+
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("Task5_RESTAPI.Db.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
+
+                    b.Property<string>("RoleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("roles");
                 });
 
             modelBuilder.Entity("Task5_RESTAPI.Db.Employee", b =>
@@ -86,10 +115,21 @@ namespace Task5_RESTAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Task5_RESTAPI.Db.Role", "Role")
+                        .WithMany("Employees")
+                        .HasForeignKey("RoleId");
+
                     b.Navigation("Department");
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Task5_RESTAPI.Db.Department", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("Task5_RESTAPI.Db.Role", b =>
                 {
                     b.Navigation("Employees");
                 });
