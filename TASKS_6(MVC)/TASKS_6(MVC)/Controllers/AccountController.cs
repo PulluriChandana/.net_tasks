@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using TASKS_6_MVC_.Models;  
 
@@ -55,7 +57,14 @@ namespace TASKS_6_MVC_.Controllers
         // GET: /Account/Register
         public IActionResult Register()
         {
-            return View();
+            var model = new RegisterViewModel();
+            model.RoleList = _roleManager.Roles
+                .Select(role => new SelectListItem
+                {
+                    Text = role.Name,
+                    Value = role.Name
+                }).ToList();
+            return View(model);
         }
 
         // POST: /Account/Register
@@ -70,6 +79,7 @@ namespace TASKS_6_MVC_.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _userManager.AddToRoleAsync(user,model.Role);
                     return RedirectToAction("Index", "Home");
                 }
                 foreach (var error in result.Errors)

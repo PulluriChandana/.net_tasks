@@ -24,5 +24,10 @@ namespace TASKS_6_MVC_.Controllers
 
             return View(viewModel);
         }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }

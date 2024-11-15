@@ -26,6 +26,7 @@ namespace TASKS_6_MVC_.Controllers
         }
 
         // GET: Employee/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewBag.Departments=this.departmentService.GetAll();
@@ -35,6 +36,7 @@ namespace TASKS_6_MVC_.Controllers
 
         // POST: Employee/Create
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
 
         public IActionResult Create(Employee employee)
@@ -71,6 +73,7 @@ namespace TASKS_6_MVC_.Controllers
         }
 
         // GET: Employee/Edit/{id}
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id)
         {
             var employee = iemployeeService.GetByEmpNo(id);
@@ -84,6 +87,7 @@ namespace TASKS_6_MVC_.Controllers
  
         // POST: Employee/Edit/{id}
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Employee employee)
         {
@@ -108,6 +112,7 @@ namespace TASKS_6_MVC_.Controllers
         }
 
         // GET: Employee/Delete/{id}
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             Employee employee=iemployeeService.GetByEmpNo(id);
@@ -120,6 +125,7 @@ namespace TASKS_6_MVC_.Controllers
 
         // POST: Employee/Delete/{id}
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
