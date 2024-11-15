@@ -24,13 +24,14 @@ namespace TASKS_6_MVC_.Controllers
             return View(departments);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Department/Create
         public IActionResult Create()
         {
             return View();
         }
 
-
+        [Authorize(Roles = "Admin")]
         // POST: Department/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -63,6 +64,7 @@ namespace TASKS_6_MVC_.Controllers
             return View(department);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Department/Edit/{id}
         public IActionResult Edit(int id)
         {
@@ -74,6 +76,7 @@ namespace TASKS_6_MVC_.Controllers
             return View(department);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: Department/Edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -99,6 +102,7 @@ namespace TASKS_6_MVC_.Controllers
             return View(department);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Department/Delete/{id}
         public IActionResult Delete(int id)
         {
@@ -110,6 +114,7 @@ namespace TASKS_6_MVC_.Controllers
             return View(department);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: Department/Delete/{id}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

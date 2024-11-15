@@ -1,0 +1,105 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<TASKS_6_MVC_.Models.SampleRole>
+
+@{
+    ViewData["Title"] = "Application Roles";
+}
+
+<head>
+    <style>
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .table th, .table td {
+                padding: 12px 15px;
+                text-align: left;
+            }
+
+            .table thead {
+                background-color: #007bff;
+                color: white;
+            }
+
+            .table tbody tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            .table tbody tr:hover {
+                background-color: #e6f7ff;
+            }
+
+            .table td, .table th {
+                border-bottom: 1px solid #ddd;
+            }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            text-align: center;
+            display: inline-block;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+
+        .page-container a {
+            text-decoration: none;
+            color: white;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align:center;
+        }
+
+    </style>
+</head>
+
+<div class="page-container">
+    <h1>@ViewData["Title"]</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New Role</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model)
+            {
+                <tr>
+                    <td>@role.Id</td>
+                    <td>@role.Name</td>
+                    <td>@role.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

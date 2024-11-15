@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace TASKS_6_MVC_.Models
@@ -24,5 +26,11 @@ namespace TASKS_6_MVC_.Models
 
         [Required]
         public string LastName { get; set; }
+        
+        [ValidateNever]
+        public List<SelectListItem> RoleList { get; set; } = 
+            new List<SelectListItem>();
+        [Required]
+        public string? Role { get; set; }
     }
 }

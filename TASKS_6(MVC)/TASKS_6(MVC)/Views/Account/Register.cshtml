@@ -2,13 +2,78 @@
 
 <head>
     <link href="~/css/Register.css" rel="stylesheet" type="text/css" />
+        <style>
+        .form-floating {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+            .form-floating label {
+                position: absolute;
+                left: 10px;
+                top: auto;
+                color: #6c757d;
+                font-size: 16px;
+                transition: all 0.2s ease-in-out;
+                pointer-events: none;
+            }
+
+            .form-floating select {
+                width: 100%;
+                padding: 12px 15px;
+                font-size: 16px;
+                color: #495057;
+                background-color: #fff;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                appearance: auto;
+                outline: none;
+                transition: border-color 0.2s ease-in-out;
+            }
+
+                .form-floating select:focus {
+                    border-color: #007bff;
+                    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+                }
+
+                    .form-floating select:valid + label,
+                    .form-floating select:focus + label {
+                        top: -8px;
+                        left: 10px;
+                        font-size: 12px;
+                        color: #007bff;
+                    }
+
+                .form-floating select option {
+                    padding: 10px;
+                    background-color: #fff;
+                    color: #495057;
+                }
+
+                .form-floating select[disabled] {
+                    background-color: #e9ecef;
+                    border-color: #ddd;
+                }
+        </style>
 </head>
 
-
+<body>
 <form method="post" class="form-horizontal">
     <h2>Create an Account</h2>
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label for="FirstName">First Name</label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="LastName">Last Name</label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
 
     <div class="form-group">
         <label for="Email">Email</label>
@@ -28,17 +93,14 @@
         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label for="FirstName">First Name</label>
-        <input asp-for="FirstName" class="form-control" />
-        <span asp-validation-for="FirstName" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label for="LastName">Last Name</label>
-        <input asp-for="LastName" class="form-control" />
-        <span asp-validation-for="LastName" class="text-danger"></span>
+    <div class="form-floating">
+        <label for="Select Role">Select Role</label>
+        <br />
+        <select asp-for="Role" asp-items="@Model.RoleList" aria-required="true">
+        <option disabled selected>Select Role</option>
+    </select>
     </div>
 
     <button type="submit" class="btn btn-primary">Register</button>
 </form>
+</body>

@@ -72,7 +72,64 @@ input.form-control {
 .form-group:last-child {
     margin-bottom: 0;
 }
+/* General Form Styling */
+            .form-floating {
+                position: relative;
+                margin-bottom: 1.5rem;
+            }
 
+            /* Style for the label */
+            .form-floating label {
+                position: absolute;
+                left: 10px;
+                top: auto;
+                color: #6c757d;
+                font-size: 16px;
+                transition: all 0.2s ease-in-out;
+                pointer-events: none;
+            }
+
+            /* Style for the select */
+            .form-floating select {
+                width: 100%;
+                padding: 12px 15px;
+                font-size: 16px;
+                color: #495057;
+                background-color: #fff;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                appearance: none; /* Remove default dropdown arrow */
+                outline: none;
+                transition: border-color 0.2s ease-in-out;
+            }
+
+            /* Focus effect for the select */
+            .form-floating select:focus {
+                border-color: #007bff;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            }
+
+            /* When the select has a value or is focused, move the label */
+            .form-floating select:valid + label,
+            .form-floating select:focus + label {
+                top: -8px;
+                left: 10px;
+                font-size: 12px;
+                color: #007bff;
+            }
+
+            /* Optional: Style the option elements (in case you want more control) */
+            .form-floating select option {
+                padding: 10px;
+                background-color: #fff;
+                color: #495057;
+            }
+
+            /* Disabled styling for select options */
+            .form-floating select[disabled] {
+                background-color: #e9ecef;
+                border-color: #ddd;
+            }
 body {
     padding-top: 0px;
 }
